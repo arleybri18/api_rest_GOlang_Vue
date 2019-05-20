@@ -37,7 +37,7 @@ type Traces struct {
 
 func InitialMigration() {
 	// create database
-	dbroot, err := gorm.Open("postgres", "postgresql://root@localhost:26257/defaultdbpostgres/?sslmode=disable")
+	dbroot, err := gorm.Open("postgres", "postgresql://root@"+host_server+":"+port_server+"/defaultdbpostgres/?sslmode=disable")
 	dbroot.Exec("CREATE USER IF NOT EXISTS yonydb;")
 	dbroot.Exec("CREATE DATABASE IF NOT EXISTS infodomains;")
 	dbroot.Exec("GRANT ALL ON DATABASE infodomains TO yonydb;")
@@ -45,7 +45,7 @@ func InitialMigration() {
 
 	// end create database
 	// open conection to databse
-	const addr = "postgresql://yonydb@localhost:26257/infodomains?sslmode=disable"
+	addr := "postgresql://" + user + "@" + host_server + ":" + port_server + "/" + name_bd + "?sslmode=disable"
 	db, err := gorm.Open("postgres", addr)
 	if err != nil {
 		log.Fatal(err)

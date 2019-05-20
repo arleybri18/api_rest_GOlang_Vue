@@ -18,11 +18,17 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+// global variables
+var user string = "yonydb"
+var host_server string = "localhost"
+var port_server string = "26257"
+var name_bd string = "infodomains"
+
 // functions to handle endpoints
 func GetDomainEndpoint(w http.ResponseWriter, req *http.Request) {
 
 	// Connect to the "infodomains" database as the "yonydb" user.
-	const addr = "postgresql://yonydb@localhost:26257/infodomains?sslmode=disable"
+	addr := "postgresql://" + user + "@" + host_server + ":" + port_server + "/" + name_bd + "?sslmode=disable"
 	db, err := gorm.Open("postgres", addr)
 	if err != nil {
 		log.Fatal(err)
@@ -73,7 +79,7 @@ func GetDomainEndpoint(w http.ResponseWriter, req *http.Request) {
 
 func ShowReportEndpoint(w http.ResponseWriter, req *http.Request) {
 	// Connect to the "infodomains" database as the "yonydb" user.
-	const addr = "postgresql://yonydb@localhost:26257/infodomains?sslmode=disable"
+	addr := "postgresql://" + user + "@" + host_server + ":" + port_server + "/" + name_bd + "?sslmode=disable"
 	db, err := gorm.Open("postgres", addr)
 	if err != nil {
 		log.Fatal(err)

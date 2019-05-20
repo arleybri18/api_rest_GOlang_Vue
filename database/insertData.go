@@ -23,11 +23,17 @@ type arr_server_raw struct {
 	serv_raw []Servers_raw
 }
 
+// // global variables
+var user string = "yonydb"
+var host_server string = "localhost"
+var port_server string = "26257"
+var name_bd string = "infodomains"
+
 func InsertData(name_domain string, server_changed bool, prev_ssl string, pageLogo string,
 	pageTitle string, Is_down bool, server consumeAPI.Servers_j, countries string, organizations string) {
 
 	// open conection to databse
-	const addr = "postgresql://yonydb@localhost:26257/infodomains?sslmode=disable"
+	addr := "postgresql://" + user + "@" + host_server + ":" + port_server + "/" + name_bd + "?sslmode=disable"
 	db, err := gorm.Open("postgres", addr)
 	if err != nil {
 		log.Fatal(err)
