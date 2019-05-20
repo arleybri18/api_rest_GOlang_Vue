@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 
-	"github.com/arleybri18/API_Rest_GO/consumeAPI"
-	"github.com/arleybri18/API_Rest_GO/consumeWhoIs"
-	"github.com/arleybri18/API_Rest_GO/database"
-	"github.com/arleybri18/API_Rest_GO/scrappingWebPage"
+	"github.com/arleybri18/api_rest_GOlang_Vue/consumeAPI"
+	"github.com/arleybri18/api_rest_GOlang_Vue/consumeWhoIs"
+	"github.com/arleybri18/api_rest_GOlang_Vue/database"
+	"github.com/arleybri18/api_rest_GOlang_Vue/scrappingWebPage"
 
 	"encoding/json"
 	"log"

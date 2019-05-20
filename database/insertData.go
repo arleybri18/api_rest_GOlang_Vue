@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"log"
 
-	"github.com/arleybri18/API_Rest_GO/consumeAPI"
+	"github.com/arleybri18/api_rest_GOlang_Vue/consumeAPI"
 
 	"github.com/jinzhu/gorm"
 	"github.com/jinzhu/gorm/dialects/postgres"
