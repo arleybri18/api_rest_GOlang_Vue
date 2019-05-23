@@ -4,7 +4,7 @@
       <h1 class="text-light">Report of Queries</h1>
       <div v-if="items.length != 0">
         <!-- first information -->
-        <div class="card bg-light m-3 col-6 mx-auto">
+        <div class="card bg-light m-3 col-7 mx-auto">
           <div class="card-header">
             <div class="table-responsive text-nowrap border-secondary">
               <div class="table table-striped">

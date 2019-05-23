@@ -36,8 +36,6 @@ func GetDomainEndpoint(w http.ResponseWriter, req *http.Request) {
 	defer db.Close()
 	var domains_db []database.Domains
 
-	// get data of the url request
-	fmt.Println("esto tiene el req ", req)
 	// get the information in url with the key dom
 	domain := chi.URLParam(req, "dom")
 
@@ -46,28 +44,24 @@ func GetDomainEndpoint(w http.ResponseWriter, req *http.Request) {
 	url := "https://api.ssllabs.com/api/v3/analyze?host=" + domain
 	// send url
 	domains := consumeAPI.ConsumeAPI(url)
-	fmt.Printf("host: %s \n port: %d \nprocotol: %s \nServers: %+v \n", domains.Host, domains.Port, domains.Protocol, domains.Server)
-
-	for index, server_1 := range domains.Server {
-		fmt.Printf("Server es %d: %s\n", index, server_1.Address)
-	}
+	// fmt.Printf("host: %s \n port: %d \nprocotol: %s \nServers: %+v \n", domains.Host, domains.Port, domains.Protocol, domains.Server)
 
 	// call function to parse country and organization
 	name_domain := domains.Host
 	countries, organizations := consumeWhoIs.RunWhoisCommand(name_domain)
-	fmt.Printf("Country is %s organization is %s\n", countries, organizations)
+	// fmt.Printf("Country is %s organization is %s\n", countries, organizations)
 
 	// call to function to get a logo and title
 	webUrl := "https://www." + name_domain
 
 	pageTitle, pageLogo := scrappingWebPage.ScrappingWebPage(webUrl)
-	// Print out the result
-	fmt.Printf("Page Title: %s\n", pageTitle)
-	// Print out the result
-	fmt.Printf("Page Logo: %s\n", pageLogo)
+	// // Print out the result
+	// fmt.Printf("Page Title: %s\n", pageTitle)
+	// // Print out the result
+	// fmt.Printf("Page Logo: %s\n", pageLogo)
 
-	// call to function to insert data
-	database.InsertData(name_domain, true, domains.Server[0].Ssl_grade, pageLogo, pageTitle, false, domains.Server[0], countries, organizations)
+	// call to function to insert data, send server stored in domains.server
+	database.InsertData(name_domain, true, domains.Server[0].Ssl_grade, pageLogo, pageTitle, false, domains.Server, countries, organizations)
 
 	// ------------------------
 
@@ -87,7 +81,7 @@ func ShowReportEndpoint(w http.ResponseWriter, req *http.Request) {
 	defer db.Close()
 	var traces []database.Traces
 
-	db.Find(&traces)
+	db.Order("created_at desc").Find(&traces)
 	json.NewEncoder(w).Encode(traces)
 }
 

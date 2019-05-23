@@ -21,9 +21,11 @@ type Domains struct {
 	Title              string
 	Is_down            bool
 	Servers            postgres.Jsonb
+	// Servers string `sql:"type:JSONB NOT NULL DEFAULT '{}'::JSONB"`
 }
 type Servers struct {
 	gorm.Model
+	Domain string
 	Address   string
 	SSL_grade string
 	Country   string

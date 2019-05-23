@@ -9,8 +9,11 @@ import (
 
 // Declare structs for JSON
 type Servers_j struct {
+	Domain    string
 	Address   string `json:"serverName"`
 	Ssl_grade string `json:"grade"`
+	Country   string `json:"country"`
+	Owner     string `json:"owner"`
 }
 
 type Info_domain struct {
@@ -19,6 +22,7 @@ type Info_domain struct {
 	Protocol string      `json:"protocol"`
 	Server   []Servers_j `json:"endpoints"`
 }
+
 // the function should begining with the uppercase name for export it
 func ConsumeAPI(url string) Info_domain {
 	var infoDomain Info_domain

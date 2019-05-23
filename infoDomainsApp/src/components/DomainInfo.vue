@@ -25,7 +25,7 @@
 
       <div v-if="doms.length != 0">
         <!-- first information -->
-        <div class="card bg-light m-3">
+        <div class="card  col-10 bg-light m-3 mx-auto">
           <div class="card-header">
             <h3 class="card-title rounded-pill bg-default text-white" style="background-color: #3498db;">Information
               about {{domain}}</h3>
@@ -42,11 +42,12 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <!-- iterate over domains -->
                   <tr v-for="dom in doms">
                     <td>{{dom.Domain}}</td>
                     <td>{{dom.Servers_changed}}</td>
                     <td>{{dom.Previous_ssl_grade}}</td>
-                    <td>{{dom.Logo}}</td>
+                    <td><img :src="dom.Logo" width="40" height="65"/></td>
                     <td>{{dom.Title}}</td>
                     <td>{{dom.Is_down}}</td>
                   </tr>
@@ -57,7 +58,7 @@
         </div>
         <!--   end first information -->
         <!-- servers -->
-        <div class="card col-8 bg-light m-3">
+        <div class="card col-8 bg-light m-3 mx-auto">
           <div class="card-header">
             <h3 class="card-title rounded-pill bg-default text-white" style="background-color: #3498db;">Servers
               {{domain}}</h3>
@@ -71,13 +72,14 @@
                   <th>Owner</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr v-for="dom in doms">
-                  <td v-for="(item, key, index) in dom.Servers">
-                    {{item}}
-                  </td>
+              <!-- iterate over info servers -->
+              <tbody v-for="dom in doms">
+                <tr v-for="ser in dom.Servers">
+                  <td>{{ser.serverName}}</td>
+                  <td>{{ser.grade}}</td>
+                  <td>{{ser.country}}</td>
+                  <td>{{ser.owner}}</td>
                 </tr>
-
               </tbody>
             </div>
           </div>
